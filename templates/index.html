@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刷题网页</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">刷题网页</h1>
+            <div class="decorative-line"></div>
+        </header>
+
+        <main>
+            <div id="upload-view" class="view active">
+                <div class="card upload-card">
+                    <h2 class="section-title">上传题目文件</h2>
+                    <p class="subtitle">支持 Word (.docx) 和 PDF 文件，包括扫描件</p>
+                    
+                    <div class="upload-zone" id="upload-zone">
+                        <div class="upload-icon">📄</div>
+                        <p class="upload-text">拖拽文件到这里或点击上传</p>
+                        <p class="upload-hint">支持多文件上传，单个文件最大 20MB</p>
+                        <input type="file" id="file-input" multiple accept=".docx,.pdf" style="display: none;">
+                    </div>
+                    
+                    <div class="file-list" id="file-list"></div>
+                    
+                    <button class="btn btn-primary" id="start-btn" disabled>
+                        解析并开始刷题
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-view" class="view">
+                <div class="quiz-layout">
+                    <div class="quiz-main">
+                        <div class="quiz-header">
+                            <div class="progress-info">
+                                <span class="current-question">第 <span id="current-num">1</span> 题</span>
+                                <span class="total-questions">/ 共 <span id="total-num">0</span> 题</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="card quiz-card">
+                            <div class="question-type" id="question-type">单选题</div>
+                            <div class="question-content" id="question-content"></div>
+                            
+                            <div class="feedback-banner" id="feedback-banner" style="display:none;">
+                                <span class="feedback-icon" id="feedback-icon"></span>
+                                <span class="feedback-text" id="feedback-text"></span>
+                            </div>
+                            
+                            <div class="options-container" id="options-container"></div>
+                            
+                            <div class="fill-answer-container" id="fill-answer-container" style="display: none;">
+                                <input type="text" class="fill-input" id="fill-input" placeholder="请输入答案">
+                                <button class="btn btn-submit" id="submit-fill-btn">提交答案</button>
+                            </div>
+
+                            <div class="quiz-nav-bar">
+                                <button class="btn btn-skip" id="skip-btn" style="display:none;">跳过此题 ⏭</button>
+                            </div>
+                            <button class="btn btn-next" id="next-btn" style="display:none;">下一题 →</button>
+                        </div>
+
+                        <div class="quiz-dots" id="quiz-dots"></div>
+                    </div>
+
+                    <div class="quiz-sidebar" id="quiz-sidebar">
+                        <div class="sidebar-title">题目导航</div>
+                        <div class="sidebar-content" id="sidebar-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="result-view" class="view">
+                <div class="card result-card">
+                    <h2 class="section-title">答题结果</h2>
+                    
+                    <div class="result-summary">
+                        <div class="circular-progress">
+                            <svg class="progress-ring" width="200" height="200">
+                                <circle class="progress-ring-bg" cx="100" cy="100" r="90"/>
+                                <circle class="progress-ring-fill" id="progress-ring-fill" cx="100" cy="100" r="90"/>
+                            </svg>
+                            <div class="progress-text">
+                                <span class="correct-count" id="correct-count">0</span>
+                                <span class="separator">/</span>
+                                <span class="total-count" id="result-total">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat-item correct">
+                                <span class="stat-label">正确</span>
+                                <span class="stat-value" id="correct-percent">0%</span>
+                            </div>
+                            <div class="stat-item wrong">
+                                <span class="stat-label">错误</span>
+                                <span class="stat-value" id="wrong-percent">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrong-answers-section">
+                        <h3 class="wrong-title">错题回顾</h3>
+                        <div class="wrong-answers-list" id="wrong-answers-list"></div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button class="btn btn-primary" id="retry-btn">再来一次</button>
+                        <button class="btn btn-secondary" id="clear-btn">清空记录</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script_new.js') }}"></script>
+</body>
+</html>
