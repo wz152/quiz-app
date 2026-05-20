@@ -18,12 +18,13 @@
             <div id="upload-view" class="view active">
                 <div class="card upload-card">
                     <h2 class="section-title">上传题目文件</h2>
-                    <p class="subtitle">支持 Word (.docx) 和 PDF 文件，包括扫描件</p>
+                    <p class="subtitle">仅支持纯文字 PDF 和 .docx 文件</p>
+                    <p class="upload-note">⚠️ PDF 扫描件（图片型）无法解析，请确保 PDF 中的文字可选</p>
                     
                     <div class="upload-zone" id="upload-zone">
                         <div class="upload-icon">📄</div>
                         <p class="upload-text">拖拽文件到这里或点击上传</p>
-                        <p class="upload-hint">支持多文件上传，单个文件最大 20MB</p>
+                        <p class="upload-hint">支持多文件上传，单个文件最大 20MB · 仅纯文字</p>
                         <input type="file" id="file-input" multiple accept=".docx,.pdf" style="display: none;">
                     </div>
                     
